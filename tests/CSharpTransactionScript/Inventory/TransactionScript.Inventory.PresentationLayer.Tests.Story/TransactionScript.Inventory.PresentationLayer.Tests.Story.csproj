@@ -33,6 +33,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\CSharpTransactionScript\Inventory\TransactionScript.Inventory.PresentationLayer\TransactionScript.Inventory.PresentationLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 
