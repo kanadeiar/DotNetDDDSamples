@@ -5,9 +5,10 @@ using TransactionScript.Inventory.PresentationLayer.Scripts;
 ConsoleHelper.PrintHeader("Образец вспомогательного поддомена на языке C#.", "Предметно-ориентированное проектирование на платформе .NET. Образцы приложений.");
 ConsoleHelper.PrintLine("Образец: транзакционный сценарий, трехслойная архитектура и перевернутая пирамида тестирования.");
 
-var storage = new InventoryStorage();
+var storage = new InventoryEntriesStorage();
 var script = new InventoryScript(storage);
-script.InitDemo();
+script.InitDemo()
+    .Throw(fail => throw new ApplicationException(fail.Error));
 
 Console.WriteLine("Все:");
 var items = script.AllItems()

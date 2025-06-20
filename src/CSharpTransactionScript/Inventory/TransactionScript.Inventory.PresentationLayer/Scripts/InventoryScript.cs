@@ -4,13 +4,21 @@ using TransactionScript.Inventory.MainLogicLayer.InventoryModule;
 
 namespace TransactionScript.Inventory.PresentationLayer.Scripts;
 
-public class InventoryScript(InventoryStorage storage)
+public class InventoryScript(InventoryEntriesStorage storage)
 {
-    public void InitDemo()
+    public Result InitDemo()
     {
-        AddItem("Колбаса");
-        AddItem("Сыр");
-        AddItem("Хлеб");
+        try
+        {
+            AddItem("Колбаса").Throw(fail => new ApplicationException(fail.Error));
+            AddItem("Сыр").Throw(fail => new ApplicationException(fail.Error));
+            AddItem("Хлеб").Throw(fail => new ApplicationException(fail.Error));
+            return Result.Ok();
+        }
+        catch (Exception e)
+        {
+            return Result.Fail("Не удалось инициализировать демонстрационные данные. Ошибка: " + e);
+        }
     }
 
     public Result<IEnumerable<string>> AllItems()
@@ -28,7 +36,7 @@ public class InventoryScript(InventoryStorage storage)
 
             var id = storage.NextIdentity();
             var item = new InventoryItem(id, name);
-            var entry = item.Backup();
+            var entry = item.Entry();
 
             storage.Save(entry);
             storage.Commit();
@@ -51,7 +59,7 @@ public class InventoryScript(InventoryStorage storage)
 
             item = item.Rename(newName);
 
-            var entry = item.Backup();
+            var entry = item.Entry();
             storage.Save(entry);
             storage.Commit();
             return Result.Ok();
@@ -73,7 +81,7 @@ public class InventoryScript(InventoryStorage storage)
 
             item = item.Quantity(newQuantity);
 
-            var entry = item.Backup();
+            var entry = item.Entry();
             storage.Save(entry);
             storage.Commit();
             return Result.Ok();

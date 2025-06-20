@@ -27,7 +27,7 @@ public class InventoryItemTests
 
         sut = sut.Rename(expected);
 
-        var actual = sut.Backup();
+        var actual = sut.Entry();
         actual.Name.Should().Be(expected);
     }
 
@@ -40,7 +40,7 @@ public class InventoryItemTests
 
         sut = sut.Quantity(expected);
 
-        var actual = sut.Backup();
+        var actual = sut.Entry();
         actual.Quantity.Should().Be(expected);
     }
 }

@@ -19,7 +19,7 @@ public class InventoryItem(int id, string? name, int quantity = 0)
 
     public InventoryItem Quantity(int newQuantity) => new(id, _name, newQuantity);
 
-    public InventoryEntry Backup()
+    public InventoryEntry Entry()
     {
         return new InventoryEntry
         {

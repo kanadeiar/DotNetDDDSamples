@@ -1,13 +1,13 @@
-﻿using TransactionScript.Inventory.DataAccessLayer.Contracts;
+﻿using ActiveRecord.Inventory.DataAccessLayer.Contracts;
 
-namespace TransactionScript.Inventory.DataAccessLayer.Data;
+namespace ActiveRecord.Inventory.DataAccessLayer.Data;
 
-public class InventoryStorage
+public class InventoryEntriesStorage
 {
     private Dictionary<int, InventoryEntry> _entries = new();
     private int _lastId;
 
-    public int NextIdentity() => _lastId++;
+    public int NextIdentity() => ++_lastId;
 
     public IEnumerable<InventoryEntry> All() => _entries.Values;
 

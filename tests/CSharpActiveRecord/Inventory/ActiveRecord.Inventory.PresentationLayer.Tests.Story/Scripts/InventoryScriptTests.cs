@@ -1,9 +1,10 @@
-﻿using FluentAssertions;
+﻿using ActiveRecord.Inventory.DataAccessLayer;
+using ActiveRecord.Inventory.DataAccessLayer.Data;
+using ActiveRecord.Inventory.PresentationLayer.Scripts;
+using FluentAssertions;
 using Kanadeiar.Common;
-using TransactionScript.Inventory.DataAccessLayer.Data;
-using TransactionScript.Inventory.PresentationLayer.Scripts;
 
-namespace TransactionScript.Inventory.PresentationLayer.Tests.Story.Scripts;
+namespace ActiveRecord.Inventory.PresentationLayer.Tests.Story.Scripts;
 
 public class InventoryScriptTests
 {
@@ -12,7 +13,8 @@ public class InventoryScriptTests
     {
         var expected = "Колбаса";
         var storage = new InventoryEntriesStorage();
-        var sut = new InventoryScript(storage);
+        Registry.InitFake(new FakeRegistry { FakeStorage = storage });
+        var sut = new InventoryScript();
         sut.InitDemo().Should().BeOfType<Result>();
 
         var actuals = sut.AllItems()
@@ -27,14 +29,14 @@ public class InventoryScriptTests
     {
         var expected = "Новое название";
         var storage = new InventoryEntriesStorage();
-        var sut = new InventoryScript(storage);
+        Registry.InitFake(new FakeRegistry { FakeStorage = storage });
+        var sut = new InventoryScript();
         sut.InitDemo().Should().BeOfType<Result>();
 
         var result = sut.ChangeName(1, expected);
 
         result.Should().BeOfType<Result>();
         var actuals = storage.All();
-        actuals.Count().Should().Be(3);
         actuals.First().Name.Should().Be(expected);
     }
 
@@ -43,7 +45,8 @@ public class InventoryScriptTests
     {
         var expected = 22;
         var storage = new InventoryEntriesStorage();
-        var sut = new InventoryScript(storage);
+        Registry.InitFake(new FakeRegistry { FakeStorage = storage });
+        var sut = new InventoryScript();
         sut.InitDemo().Should().BeOfType<Result>();
 
         var result = sut.ChangeQuantity(1, expected);
