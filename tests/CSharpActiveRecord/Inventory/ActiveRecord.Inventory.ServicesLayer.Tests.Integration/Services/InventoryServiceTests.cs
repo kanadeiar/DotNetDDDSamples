@@ -5,7 +5,6 @@ using ActiveRecord.Inventory.ServicesLayer.Services;
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using Kanadeiar.Common;
-using System.Xml.Linq;
 
 namespace ActiveRecord.Inventory.ServicesLayer.Tests.Integration.Services;
 
