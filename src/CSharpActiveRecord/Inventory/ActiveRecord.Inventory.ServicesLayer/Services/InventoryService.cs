@@ -12,9 +12,7 @@ public class InventoryService
         {
             Registry.Storage.BeginTransaction();
 
-            var item = InventoryItem.Create(name, quantity)
-                .TryGetValue(fail => throw new ApplicationException(fail.Error));
-
+            var item = InventoryItem.Create(name, quantity);
             var result = item.Add();
 
             Registry.Storage.Commit();
@@ -37,7 +35,7 @@ public class InventoryService
     {
         try
         {
-            var items = Registry.Storage.All().Select(InventoryItem.Create)
+            var items = Registry.Storage.All().Select(InventoryItem.Restore)
                 .Select(item => $"{item}");
 
             return Result.Ok(items);
@@ -56,7 +54,7 @@ public class InventoryService
 
             var entry = Registry.Storage.Load(id);
             if (entry == null) return Result.Fail("Не удалось найти элемент.");
-            var item = InventoryItem.Create(entry);
+            var item = InventoryItem.Restore(entry);
 
             var actual = item.Rename(newName);
 
@@ -78,7 +76,7 @@ public class InventoryService
 
             var entry = Registry.Storage.Load(id);
             if (entry == null) return Result.Fail("Не удалось найти элемент.");
-            var item = InventoryItem.Create(entry);
+            var item = InventoryItem.Restore(entry);
 
             var actual = item.Quantity(newQuantity);
             

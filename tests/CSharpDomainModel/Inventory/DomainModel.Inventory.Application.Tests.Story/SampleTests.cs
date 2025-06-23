@@ -3,7 +3,7 @@ using FluentAssertions;
 using Kanadeiar.Tests;
 using Moq;
 
-namespace DomainModel.Inventory.Infra.Tests.Story;
+namespace DomainModel.Inventory.Application.Tests.Story;
 
 public class SampleTests
 {

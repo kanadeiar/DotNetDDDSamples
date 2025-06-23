@@ -2,9 +2,9 @@
 
 public class InventoryEntry
 {
-    public int Id { get; set; }
+    public int Id { get; init; }
 
-    public string? Name { get; set; }
+    public string Name { get; init; } = string.Empty;
 
-    public int Quantity { get; set; }
+    public int Quantity { get; init; }
 }

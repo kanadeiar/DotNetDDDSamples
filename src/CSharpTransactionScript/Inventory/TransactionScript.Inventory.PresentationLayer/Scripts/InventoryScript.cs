@@ -23,7 +23,7 @@ public class InventoryScript(InventoryEntriesStorage storage)
 
     public Result<IEnumerable<string>> AllItems()
     {
-        var items = storage.All().Select(InventoryItem.Create).Select(item => $"{item}");
+        var items = storage.All().Select(InventoryItem.Restore).Select(item => $"{item}");
 
         return Result.Ok(items);
     }
@@ -55,7 +55,7 @@ public class InventoryScript(InventoryEntriesStorage storage)
         {
             storage.BeginTransaction();
             var loaded = storage.Load(id);
-            var item = InventoryItem.Create(loaded);
+            var item = InventoryItem.Restore(loaded);
 
             item = item.Rename(newName);
 
@@ -77,7 +77,7 @@ public class InventoryScript(InventoryEntriesStorage storage)
         {
             storage.BeginTransaction();
             var loaded = storage.Load(id);
-            var item = InventoryItem.Create(loaded);
+            var item = InventoryItem.Restore(loaded);
 
             item = item.Quantity(newQuantity);
 

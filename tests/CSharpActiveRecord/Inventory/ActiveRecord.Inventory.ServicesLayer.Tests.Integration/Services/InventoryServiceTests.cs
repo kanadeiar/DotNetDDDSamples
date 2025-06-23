@@ -1,15 +1,28 @@
 ﻿using ActiveRecord.Inventory.DataAccessLayer;
 using ActiveRecord.Inventory.DataAccessLayer.Contracts;
 using ActiveRecord.Inventory.DataAccessLayer.Data;
+using ActiveRecord.Inventory.MainLogicLayer.InventoryModule;
 using ActiveRecord.Inventory.ServicesLayer.Services;
 using AutoFixture.Xunit2;
 using FluentAssertions;
+using FrameworkConsoleApp1Tests.Infrastructure;
 using Kanadeiar.Common;
 
 namespace ActiveRecord.Inventory.ServicesLayer.Tests.Integration.Services;
 
 public class InventoryServiceTests
 {
+    [Theory(DisplayName = "Тестирование создания нового предмета")]
+    [InlineAutoMoqData(1, "Тестовое", 10)]
+    public void TestCreateNewInventory(int id, string name, int quantity)
+    {
+        var actual = new InventoryItem(id, name, quantity);
+        var entry = actual.Entry();
+        entry.Id.Should().Be(id);
+        entry.Name.Should().Be(name);
+        entry.Quantity.Should().Be(quantity);
+    }
+
     [Theory(DisplayName = "Проверка возможности добавления нового элемента")]
     [AutoData]
     public void TestCreateNewInventoryItem(string name, int quantity)
@@ -31,7 +44,7 @@ public class InventoryServiceTests
     public void TestAllInventoryItems(InventoryEntry entry)
     {
         var storage = new InventoryEntriesStorage();
-        entry.Id = storage.NextIdentity();
+        entry = new InventoryEntry { Id = storage.NextIdentity(), Name = entry.Name, Quantity = entry.Quantity };
         storage.Save(entry);
         Registry.InitFake(new FakeRegistry { FakeStorage = storage });
         var sut = new InventoryService();
@@ -50,7 +63,7 @@ public class InventoryServiceTests
     {
         var expected = "newName";
         var storage = new InventoryEntriesStorage();
-        entry.Id = storage.NextIdentity();
+        entry = new InventoryEntry { Id = storage.NextIdentity(), Name = entry.Name, Quantity = entry.Quantity };
         storage.Save(entry);
         Registry.InitFake(new FakeRegistry { FakeStorage = storage });
         var sut = new InventoryService();
@@ -68,7 +81,7 @@ public class InventoryServiceTests
     {
         var expected = 333;
         var storage = new InventoryEntriesStorage();
-        entry.Id = storage.NextIdentity();
+        entry = new InventoryEntry { Id = storage.NextIdentity(), Name = entry.Name, Quantity = entry.Quantity };
         storage.Save(entry);
         Registry.InitFake(new FakeRegistry { FakeStorage = storage });
         var sut = new InventoryService();

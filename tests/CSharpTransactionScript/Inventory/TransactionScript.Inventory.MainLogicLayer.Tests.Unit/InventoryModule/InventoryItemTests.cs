@@ -8,12 +8,23 @@ namespace TransactionScript.Inventory.MainLogicLayer.Tests.Unit.InventoryModule;
 
 public class InventoryItemTests
 {
-    [Theory(DisplayName = "Тестирование нарушения инвариантов при создании одного предмета")]
-    [InlineAutoMoqData("Т", 10)]
-    [InlineAutoMoqData("Тестов", -1)]
-    public void TestCreateNewInventory_WhenInvariantError(string name, int quantity)
+    [Theory(DisplayName = "Тестирование создания нового предмета")]
+    [InlineAutoMoqData(1, "Тестовое", 10)]
+    public void TestCreateNewInventory(int id, string name, int quantity)
     {
-        Action act = () => { _ = new InventoryItem(0, name, quantity); };
+        var actual = new InventoryItem(id, name, quantity);
+        var entry = actual.Entry();
+        entry.Id.Should().Be(id);
+        entry.Name.Should().Be(name);
+        entry.Quantity.Should().Be(quantity);
+    }
+
+    [Theory(DisplayName = "Тестирование нарушения инвариантов при создании одного предмета")]
+    [InlineAutoMoqData(0, "Т", 10)]
+    [InlineAutoMoqData(0, "Тестов", -1)]
+    public void TestCreateNewInventory_WhenInvariantError(int id, string name, int quantity)
+    {
+        Action act = () => { _ = new InventoryItem(id, name, quantity); };
 
         act.Should().Throw<ApplicationException>();
     }
@@ -23,7 +34,7 @@ public class InventoryItemTests
     public void TestRename(InventoryEntry entry)
     {
         var expected = "Новое имя";
-        var sut = InventoryItem.Create(entry);
+        var sut = InventoryItem.Restore(entry);
 
         sut = sut.Rename(expected);
 
@@ -36,7 +47,7 @@ public class InventoryItemTests
     public void TestQuantity(InventoryEntry entry)
     {
         var expected = 44;
-        var sut = InventoryItem.Create(entry);
+        var sut = InventoryItem.Restore(entry);
 
         sut = sut.Quantity(expected);
 

@@ -4,7 +4,7 @@ using Kanadeiar.Common;
 
 namespace ActiveRecord.Inventory.MainLogicLayer.InventoryModule;
 
-public class InventoryItem(int id, string? name, int quantity)
+public class InventoryItem(int id, string name, int quantity)
 {
     public int RecordId => id;
 
@@ -13,14 +13,14 @@ public class InventoryItem(int id, string? name, int quantity)
     private readonly int _quantity = quantity.Require(quantity is >= 0 and <= 10000, () =>
         throw new ApplicationException("Количество должно быть от 0 до 10000 лет"));
 
-    public static Result<InventoryItem> Create(string? name, int quantity)
+    public static InventoryItem Create(string name, int quantity)
     {
         var id = Registry.Storage.NextIdentity();
-        var item = new InventoryItem(id, name, quantity);
-        return Result.Ok(item);
+        var result = new InventoryItem(id, name, quantity);
+        return result;
     }
 
-    public static InventoryItem Create(InventoryEntry entry)
+    public static InventoryItem Restore(InventoryEntry entry)
     {
         return new InventoryItem(entry.Id, entry.Name, entry.Quantity);
     }

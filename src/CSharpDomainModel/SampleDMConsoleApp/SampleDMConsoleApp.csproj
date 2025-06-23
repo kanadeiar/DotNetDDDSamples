@@ -13,4 +13,8 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Inventory\DomainModel.Inventory.Infra\DomainModel.Inventory.Infra.csproj" />
+  </ItemGroup>
+
 </Project>

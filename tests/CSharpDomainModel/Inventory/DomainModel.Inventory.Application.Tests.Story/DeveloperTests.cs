@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace DomainModel.Inventory.Infra.Tests.Story;
+namespace DomainModel.Inventory.Application.Tests.Story;
 
 public class DeveloperTests
 {
