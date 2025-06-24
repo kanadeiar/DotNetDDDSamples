@@ -1,17 +1,10 @@
-﻿using DomainModel.Inventory.Application.Develop;
-using DomainModel.Inventory.Application.InventoryFeature;
-using DomainModel.Inventory.Infra.Adapters;
-using DomainModel.Inventory.Infra.Tools;
-using Kanadeiar.Common;
+﻿using Kanadeiar.Common;
+using SampleDMConsoleApp;
 
-ConsoleHelper.PrintHeader("Образец вспомогательного поддомена на языке C#.", "Предметно-ориентированное проектирование на платформе .NET. Образцы приложений.");
+ConsoleHelper.PrintHeader("Образец основного поддомена на языке C#.", "Предметно-ориентированное проектирование на платформе .NET. Образцы приложений.");
 ConsoleHelper.PrintLine("Образец: модель предметной области, порты и адаптеры и пирамида тестирования.");
 
-var storage = new InventoryStorage();
-var dispatcher = new DomainEventDispatcher();
-var script = new InventoryScript(storage, dispatcher);
-DeveloperScript.RunExample(dispatcher);
-dispatcher.Run();
+var script = GeneralHelper.CreateScript();
 
 script.InitDemo()
     .Throw(fail => throw new ApplicationException(fail.Error));
@@ -40,3 +33,4 @@ foreach (var text in updatedItems)
 }
 
 ConsoleHelper.PrintFooter();
+
