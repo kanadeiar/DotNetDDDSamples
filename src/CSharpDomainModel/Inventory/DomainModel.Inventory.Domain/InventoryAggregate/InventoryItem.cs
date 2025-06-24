@@ -23,14 +23,14 @@ public class InventoryItem(InventoryId id, InventoryNameValue name, QuantityValu
     public InventoryItem Rename(string newName)
     {
         var result = new InventoryItem(id, new InventoryNameValue(newName), quantity);
-        result.AddEvent(new InventoryRenamed(id, newName));
+        result.AddEvent(new InventoryRenamed(id, new InventoryNameValue(newName)));
         return result;
     }
     
     public InventoryItem Quantity(int newQuantity)
     {
         var result = new InventoryItem(id, name, new QuantityValue(newQuantity));
-        result.AddEvent(new InventoryQuantityChanged(id, newQuantity));
+        result.AddEvent(new InventoryQuantityChanged(id, new QuantityValue(newQuantity)));
         return result;
     }
 

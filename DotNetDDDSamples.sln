@@ -94,6 +94,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel.Inventory.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel.Inventory.Application.Tests.Story", "tests\CSharpDomainModel\Inventory\DomainModel.Inventory.Application.Tests.Story\DomainModel.Inventory.Application.Tests.Story.csproj", "{895A9A07-8835-472C-88D1-7DF18E7AEA5A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharpEventSource", "CSharpEventSource", "{FDB9DEA3-3A60-4937-8962-C33B0259C44D}"
+	ProjectSection(SolutionItems) = preProject
+		src\CSharpEventSource\README.md = src\CSharpEventSource\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharpEventSource", "CSharpEventSource", "{D6743101-DE6A-419F-9E3D-66D8647720C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inventory", "Inventory", "{7C20D613-40F0-4DC3-9B0B-ECB0B3951358}"
+	ProjectSection(SolutionItems) = preProject
+		src\CSharpEventSource\Inventory\README.md = src\CSharpEventSource\Inventory\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inventory", "Inventory", "{2129C934-3C92-4277-B6EF-3861854D5796}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -217,6 +231,10 @@ Global
 		{7A5DF5FF-EE71-433D-A4D6-68DF62793292} = {E96B80BF-4AD2-41E3-B768-0C075FC9AE41}
 		{E60AAED8-E6AD-4CC8-A836-E61F366AC8BC} = {F6EF8619-C793-4503-B8E3-9D492D4F7724}
 		{895A9A07-8835-472C-88D1-7DF18E7AEA5A} = {F6EF8619-C793-4503-B8E3-9D492D4F7724}
+		{FDB9DEA3-3A60-4937-8962-C33B0259C44D} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+		{D6743101-DE6A-419F-9E3D-66D8647720C7} = {DB86EBF8-E363-4D18-99B9-DA42CCFFAA07}
+		{7C20D613-40F0-4DC3-9B0B-ECB0B3951358} = {FDB9DEA3-3A60-4937-8962-C33B0259C44D}
+		{2129C934-3C92-4277-B6EF-3861854D5796} = {D6743101-DE6A-419F-9E3D-66D8647720C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FF584F4A-4745-4876-A5B1-C7A9935F5E75}

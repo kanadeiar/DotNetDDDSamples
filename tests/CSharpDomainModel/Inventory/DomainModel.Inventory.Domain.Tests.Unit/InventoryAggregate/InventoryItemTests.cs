@@ -43,31 +43,31 @@ public class InventoryItemTests
     [AutoMoqData]
     public void TestRename(InventoryEntry entry)
     {
-        var expected = "Новое имя";
+        var expected = new InventoryNameValue("Новое имя");
         var sut = InventoryItem.Restore(entry);
 
-        var actual = sut.Rename(expected);
+        var actual = sut.Rename(expected.Name);
 
         var actualEntry = actual.Entry();
-        actualEntry.Name.Should().Be(expected);
+        actualEntry.Name.Should().Be(expected.Name);
         var events = actual.TakeEvents();
         events.Count().Should().Be(1);
-        (events.Last() as InventoryRenamed).Name.Name.Should().Be(expected);
+        (events.Last() as InventoryRenamed).Name.Should().Be(expected);
     }
 
     [Theory(DisplayName = "Проверка того, что можно изменить количество элементов любого предмета на складе")]
     [AutoMoqData]
     public void TestQuantity(InventoryEntry entry)
     {
-        var expected = 44;
+        var expected = new QuantityValue(44);
         var sut = InventoryItem.Restore(entry);
 
-        var actual = sut.Quantity(expected);
+        var actual = sut.Quantity(expected.Quantity);
 
         var actualEntry = actual.Entry();
-        actualEntry.Quantity.Should().Be(expected);
+        actualEntry.Quantity.Should().Be(expected.Quantity);
         var events = actual.TakeEvents();
         events.Count().Should().Be(1);
-        (events.Last() as InventoryQuantityChanged).Quantity.Quantity.Should().Be(expected);
+        (events.Last() as InventoryQuantityChanged).Quantity.Should().Be(expected);
     }
 }
