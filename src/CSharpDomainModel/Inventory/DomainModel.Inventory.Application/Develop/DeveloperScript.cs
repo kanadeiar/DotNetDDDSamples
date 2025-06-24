@@ -9,7 +9,7 @@ public static class DeveloperScript
     {
         dispatcher.RegisterHandler<InventoryCreated>(ev =>
         {
-            Console.WriteLine("## Событие создания нового элемента ##" + ev.Id + " " + ev.OccurredOn);
+            Console.WriteLine("## Событие создания нового элемента ## id:" + ev.Id + " " + ev.OccurredOn);
         });
     }
 }

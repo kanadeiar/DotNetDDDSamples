@@ -35,19 +35,66 @@ public class InventoryScript(IInventoryStorage storage, IDispatcher dispatcher)
         try
         {
             storage.BeginTransaction();
-
-            var item = InventoryItem.Create(storage.NextIdentity(), new InventoryNameValue(name), new QuantityValue(0));
+            var id = storage.NextIdentity();
+            
+            var item = InventoryItem.Create(id, new InventoryNameValue(name), new QuantityValue(0));
 
             var events = item.TakeEvents();
             dispatcher.Dispatch(events);
             storage.Save(item);
             storage.Commit();
-            return Result.Ok(storage.NextIdentity());
+            return Result.Ok(id);
         }
         catch (Exception e)
         {
             storage.Rollback();
             return Result.Fail<InventoryId>("Не удалось добавить новый элемент. Ошибка: " + e);
+        }
+    }
+
+    public Result ChangeName(int id, string newName)
+    {
+        try
+        {
+            storage.BeginTransaction();
+            var item = storage.Load(new InventoryId(id))
+                .TryGetValue(fail => throw new ApplicationException(fail.Error));
+
+            item = item.Rename(newName);
+
+            var events = item.TakeEvents();
+            dispatcher.Dispatch(events);
+            storage.Save(item);
+            storage.Commit();
+            return Result.Ok();
+        }
+        catch (Exception e)
+        {
+            storage.Rollback();
+            return Result.Fail("Не удалось добавить новый элемент. Ошибка: " + e);
+        }
+    }
+
+    public Result ChangeQuantity(int id, int newQuantity)
+    {
+        try
+        {
+            storage.BeginTransaction();
+            var item = storage.Load(new InventoryId(id))
+                .TryGetValue(fail => throw new ApplicationException(fail.Error));
+
+            item = item.Quantity(newQuantity);
+
+            var events = item.TakeEvents();
+            dispatcher.Dispatch(events);
+            storage.Save(item);
+            storage.Commit();
+            return Result.Ok();
+        }
+        catch (Exception e)
+        {
+            storage.Rollback();
+            return Result.Fail("Не удалось добавить новый элемент. Ошибка: " + e);
         }
     }
 }
