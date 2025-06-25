@@ -7,7 +7,7 @@ namespace DomainModel.Inventory.Domain.InventoryAggregate;
 
 public class InventoryItem(InventoryId id, InventoryNameValue name, QuantityValue quantity) : Aggregate
 {
-    public InventoryId AggregateId => id;
+    public InventoryId Id => id;
 
     public static InventoryItem Create(InventoryId id, InventoryNameValue name, QuantityValue quantity)
     {

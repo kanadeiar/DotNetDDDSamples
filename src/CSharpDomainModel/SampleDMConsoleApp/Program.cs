@@ -1,5 +1,5 @@
 ﻿using Kanadeiar.Common;
-using SampleDMConsoleApp;
+using SampleDMConsoleApp.Helpers;
 
 ConsoleHelper.PrintHeader("Образец основного поддомена на языке C#.", "Предметно-ориентированное проектирование на платформе .NET. Образцы приложений.");
 ConsoleHelper.PrintLine("Образец: модель предметной области, порты и адаптеры и пирамида тестирования.");

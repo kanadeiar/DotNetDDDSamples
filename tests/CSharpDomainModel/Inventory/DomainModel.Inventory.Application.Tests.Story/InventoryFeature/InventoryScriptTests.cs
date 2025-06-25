@@ -47,7 +47,7 @@ public class InventoryScriptTests
         var result = sut.ChangeName(1, expected.Name);
 
         result.Should().BeOfType<Result>();
-        actual.AggregateId.Should().Be(item.AggregateId);
+        actual.Id.Should().Be(item.Id);
         actual.Entry().Name.Should().Be(expected.Name);
         actualEvents.Count().Should().Be(1);
         ((InventoryRenamed)actualEvents.First()).Name.Should().Be(expected);
@@ -73,7 +73,7 @@ public class InventoryScriptTests
         var result = sut.ChangeQuantity(1, expected.Quantity);
 
         result.Should().BeOfType<Result>();
-        actual.AggregateId.Should().Be(item.AggregateId);
+        actual.Id.Should().Be(item.Id);
         actual.Entry().Quantity.Should().Be(expected.Quantity);
         actualEvents.Count().Should().Be(1);
         ((InventoryQuantityChanged)actualEvents.First()).Quantity.Should().Be(expected);

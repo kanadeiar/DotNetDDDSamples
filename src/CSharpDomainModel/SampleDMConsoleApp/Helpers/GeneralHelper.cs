@@ -3,7 +3,7 @@ using DomainModel.Inventory.Infra.Adapters;
 using DomainModel.Inventory.Infra.Tools;
 using DomainModel.Inventory.Application.InventoryFeature;
 
-namespace SampleDMConsoleApp;
+namespace SampleDMConsoleApp.Helpers;
 
 public static class GeneralHelper
 {

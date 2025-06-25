@@ -6,7 +6,7 @@ public abstract class AggregateRoot
 {
     private readonly List<DomainEvent> _changes = new();
 
-    public abstract IId AggregateId { get; }
+    public abstract IId Id { get; }
 
     public int Version { get; private set; } = -1;
 

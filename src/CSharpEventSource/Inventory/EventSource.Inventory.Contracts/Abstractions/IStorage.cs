@@ -8,4 +8,8 @@ public interface IStorage<out T>
     T GetById(IId id);
 
     void Save(AggregateRoot aggregate);
+
+    public void BeginTransaction();
+    public void Commit();
+    public void Rollback();
 }
