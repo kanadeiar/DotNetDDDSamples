@@ -16,6 +16,16 @@ public class InventoryItem : AggregateRoot
 
     public InventoryItem() { }
 
+    public void Rename(InventoryNameValue newName)
+    {
+        ApplyChange(new InventoryRenamed(Id, newName));
+    }
+
+    public void Quantity(QuantityValue newQuantity)
+    {
+        ApplyChange(new InventoryQuantityChanged(Id, newQuantity));
+    }
+
     protected override void Mutate(DomainEvent @event) =>
         ((dynamic)this).when((dynamic)@event);
 
@@ -23,4 +33,8 @@ public class InventoryItem : AggregateRoot
     {
         _id = ev.Id;
     }
+
+    private void when(InventoryRenamed ev) { }
+
+    private void when(InventoryQuantityChanged ev) { }
 }

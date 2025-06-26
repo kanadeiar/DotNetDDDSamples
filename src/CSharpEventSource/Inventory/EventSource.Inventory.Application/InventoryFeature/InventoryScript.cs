@@ -31,22 +31,63 @@ public class InventoryScript(IStorage<InventoryItem> storage, Master master)
         return Result.Ok(items);
     }
 
-    public Result AddItem(string name)
+    public Result<InventoryId> AddItem(string name)
     {
         try
         {
             storage.BeginTransaction();
-
-            var item = new InventoryItem(InventoryId.New, new InventoryNameValue(name), new QuantityValue(0));
+            var id = InventoryId.New;
+            
+            var item = new InventoryItem(id, new InventoryNameValue(name), new QuantityValue(0));
 
             storage.Save(item);
+            storage.Commit();
+            return Result.Ok(id);
+        }
+        catch (Exception e)
+        {
+            storage.Rollback();
+            return Result.Fail<InventoryId>("Не удалось добавить новый элемент. Ошибка: " + e);
+        }
+    }
 
+    public Result ChangeName(Guid id, string newName)
+    {
+        try
+        {
+            storage.BeginTransaction();
+            var item = storage.GetById(new InventoryId(id));
+
+            item.Rename(new InventoryNameValue(newName));
+
+            storage.Save(item);
+            storage.Commit();
             return Result.Ok();
         }
         catch (Exception e)
         {
             storage.Rollback();
-            return Result.Fail("Не удалось добавить новый элемент. Ошибка: " + e);
+            return Result.Fail("Не удалось изменить название элемента. Ошибка: " + e);
+        }
+    }
+
+    public Result ChangeQuantity(Guid id, int newQuantity)
+    {
+        try
+        {
+            storage.BeginTransaction();
+            var item = storage.GetById(new InventoryId(id));
+
+            item.Quantity(new QuantityValue(newQuantity));
+
+            storage.Save(item);
+            storage.Commit();
+            return Result.Ok();
+        }
+        catch (Exception e)
+        {
+            storage.Rollback();
+            return Result.Fail("Не удалось изменить количество элемента. Ошибка: " + e);
         }
     }
 }

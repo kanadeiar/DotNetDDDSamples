@@ -14,5 +14,7 @@ public class Master(IReadModelStorage storage)
     {
         var view = new InventoryView(storage);
         dispatcher.RegisterHandler<InventoryCreated>(view.Handle);
+        dispatcher.RegisterHandler<InventoryRenamed>(view.Handle);
+        dispatcher.RegisterHandler<InventoryQuantityChanged>(view.Handle);
     }
 }
