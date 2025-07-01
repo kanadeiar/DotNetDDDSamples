@@ -6,4 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="$(SolutionDir)\shared\functional\**\*.*">
+      <Link>Common\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstractions\Base\" />
+    <Folder Include="Abstractions\Entries\" />
+    <Folder Include="InventoryAggregate\" />
+  </ItemGroup>
+
 </Project>

@@ -18,4 +18,9 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="InventoryAggregate\" />
+    <Folder Include="ReadModel\" />
+  </ItemGroup>
+
 </Project>

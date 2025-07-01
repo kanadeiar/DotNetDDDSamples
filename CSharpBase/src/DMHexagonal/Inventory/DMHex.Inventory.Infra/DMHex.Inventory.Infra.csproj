@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Adapters\" />
+    <Folder Include="Tools\" />
+  </ItemGroup>
+
 </Project>
