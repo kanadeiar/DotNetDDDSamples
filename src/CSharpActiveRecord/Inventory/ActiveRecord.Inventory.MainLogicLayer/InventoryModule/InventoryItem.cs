@@ -6,7 +6,7 @@ namespace ActiveRecord.Inventory.MainLogicLayer.InventoryModule;
 
 public class InventoryItem(int id, string name, int quantity)
 {
-    public int RecordId => id;
+    public int Id => id;
 
     private readonly string _name = name!.Require(name!.Length is >= 3 and <= 90, () =>
         throw new ApplicationException("Название должно быть длинной от 3 до 90 символов"));
@@ -27,12 +27,12 @@ public class InventoryItem(int id, string name, int quantity)
 
     public InventoryItem Rename(string newName)
     {
-        return new InventoryItem(RecordId, newName, _quantity);
+        return new InventoryItem(Id, newName, _quantity);
     }
 
     public InventoryItem Quantity(int newQuantity)
     {
-        return new InventoryItem(RecordId, _name, newQuantity);
+        return new InventoryItem(Id, _name, newQuantity);
     }
 
     public static Result<InventoryItem> Find(int id)
@@ -60,7 +60,7 @@ public class InventoryItem(int id, string name, int quantity)
         {
             var entity = new InventoryEntry
             {
-                Id = RecordId,
+                Id = Id,
                 Name = name,
                 Quantity = quantity,
             };

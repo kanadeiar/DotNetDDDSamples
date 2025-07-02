@@ -1,12 +1,13 @@
-﻿using DomainModel.Inventory.Contracts.Entries;
+﻿using DomainModel.Inventory.Contracts.Base;
+using DomainModel.Inventory.Contracts.Entries;
 using DomainModel.Inventory.Domain.InventoryAggregate.Values;
 using DomainModel.Inventory.Domain.InventoryAggregate.Events;
 
 namespace DomainModel.Inventory.Domain.InventoryAggregate;
 
-public class InventoryItem(InventoryId id, InventoryNameValue name, QuantityValue quantity) : Base.Aggregate
+public class InventoryItem(InventoryId id, InventoryNameValue name, QuantityValue quantity) : Aggregate
 {
-    public InventoryId AggregateId => id;
+    public InventoryId Id => id;
 
     public static InventoryItem Create(InventoryId id, InventoryNameValue name, QuantityValue quantity)
     {

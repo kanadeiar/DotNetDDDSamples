@@ -20,7 +20,7 @@ public class InventoryService
             return result switch
             {
                 IFail fail => Result.Fail<int>(fail.Error),
-                not null => Result.Ok(item.RecordId),
+                not null => Result.Ok(item.Id),
                 _ => throw new IndexOutOfRangeException(nameof(result)),
             };
         }

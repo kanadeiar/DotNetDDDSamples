@@ -35,7 +35,7 @@ public class InventoryStorage : IInventoryStorage
     {
         var entry = aggregate.Entry();
 
-        _entries[aggregate.AggregateId] = entry;
+        _entries[aggregate.Id] = entry;
     }
 
     public void BeginTransaction() { }

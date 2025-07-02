@@ -71,7 +71,7 @@ public class InventoryScript(IInventoryStorage storage, IDispatcher dispatcher)
         catch (Exception e)
         {
             storage.Rollback();
-            return Result.Fail("Не удалось добавить новый элемент. Ошибка: " + e);
+            return Result.Fail("Не удалось изменить название элемента. Ошибка: " + e);
         }
     }
 
@@ -94,7 +94,7 @@ public class InventoryScript(IInventoryStorage storage, IDispatcher dispatcher)
         catch (Exception e)
         {
             storage.Rollback();
-            return Result.Fail("Не удалось добавить новый элемент. Ошибка: " + e);
+            return Result.Fail("Не удалось изменить количество элементов. Ошибка: " + e);
         }
     }
 }

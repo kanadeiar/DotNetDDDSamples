@@ -1,6 +1,4 @@
-﻿using DomainModel.Inventory.Contracts.Base;
-
-namespace DomainModel.Inventory.Domain.Base;
+﻿namespace DomainModel.Inventory.Contracts.Base;
 
 public class Aggregate
 {
