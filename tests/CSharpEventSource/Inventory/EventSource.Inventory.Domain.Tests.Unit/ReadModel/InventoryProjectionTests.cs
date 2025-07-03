@@ -3,7 +3,7 @@ using EventSource.Inventory.Domain.InventoryAggregate.Events;
 using EventSource.Inventory.Domain.InventoryAggregate.Values;
 using EventSource.Inventory.Domain.ReadModel;
 using FluentAssertions;
-using FrameworkConsoleApp1Tests.Infrastructure;
+using Kanadeiar.Common.Tests;
 
 namespace EventSource.Inventory.Domain.Tests.Unit.ReadModel;
 

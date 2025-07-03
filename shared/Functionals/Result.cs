@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Kanadeiar.Common;
+namespace Kanadeiar.Common.Functionals;
 
 public interface IFail
 {

@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
-using FrameworkConsoleApp1Tests.Infrastructure;
-using Kanadeiar.Tests;
+using Kanadeiar.Common.Tests;
 using TransactionScript.Inventory.DataAccessLayer.Contracts;
 using TransactionScript.Inventory.MainLogicLayer.InventoryModule;
 

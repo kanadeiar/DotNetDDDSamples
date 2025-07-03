@@ -1,5 +1,5 @@
-﻿using RearmCSharp1L1T1.Questionnaire.PresentationLayer.Abstractions;
-using RearmCSharp1L1T1.Questionnaire.PresentationLayer.Adapters;
+﻿using Kanadeiar.Common.Abstractions;
+using Kanadeiar.Common.Wrappers;
 using System.Globalization;
 using System.Numerics;
 

@@ -1,4 +1,4 @@
-﻿namespace Kanadeiar.Common;
+﻿namespace Kanadeiar.Common.Functionals;
 
 public abstract record ExampleCode
 {

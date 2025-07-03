@@ -6,11 +6,12 @@ namespace EventSource.Inventory.Infra.Data;
 public class Storage<T>(IEventStore storage) : IStorage<T>
     where T : AggregateRoot, new()
 {
-    public T GetById(IId id)
+    public T Load(IId id)
     {
         var result = new T();
         var stream = storage.LoadEventStream(id);
-        result.Load(stream);
+        result.Apply(stream);
+
         return result;
     }
 

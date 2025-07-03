@@ -3,8 +3,7 @@ using EventSource.Inventory.Domain.InventoryAggregate;
 using EventSource.Inventory.Domain.InventoryAggregate.Events;
 using EventSource.Inventory.Domain.InventoryAggregate.Values;
 using FluentAssertions;
-using FrameworkConsoleApp1Tests.Infrastructure;
-using Kanadeiar.Tests;
+using Kanadeiar.Common.Tests;
 
 namespace EventSource.Inventory.Domain.Tests.Unit.InventoryAggregate;
 
@@ -42,7 +41,7 @@ public class InventoryItemTests
     {
         var stream = new EventStream([ev]);
         var sut = new InventoryItem();
-        sut.Load(stream);
+        sut.Apply(stream);
         sut.Reset();
 
         sut.Rename(expected);
@@ -58,7 +57,7 @@ public class InventoryItemTests
     {
         var stream = new EventStream([ev]);
         var sut = new InventoryItem();
-        sut.Load(stream);
+        sut.Apply(stream);
         sut.Reset();
 
         sut.Quantity(expected);

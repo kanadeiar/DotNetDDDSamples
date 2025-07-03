@@ -1,40 +1,26 @@
 ﻿using Kanadeiar.Common;
 using SampleESConsoleApp.Helpers;
+using SampleESConsoleApp.Scripts;
 
 ConsoleHelper.PrintHeader("Образец основного поддомена на языке C#.", "Предметно-ориентированное проектирование на платформе .NET. Образцы приложений.");
 ConsoleHelper.PrintLine("Образец: модель предметной области, основанная на событиях, CQRS и пирамида тестирования.");
 
-var script = GeneralHelper.CreateScript();
+var service = GeneralHelper.CreateService();
+var script = new InventoryPresentationScript(service);
 
-script.InitDemo()
-    .Throw(fail => throw new ApplicationException(fail.Error));
+script.InitDemo();
 
 ConsoleHelper.Pause();
 
-ConsoleHelper.PrintLine("Все элементы:");
-var items = script.AllItems()
-    .TryGetValue(fail => throw new ApplicationException(fail.Error));
-foreach (var text in items)
-{
-    ConsoleHelper.PrintLine(text);
-}
+script.PrintAllItems();
 
-var id = script.AddItem("newItem")
-    .TryGetValue(fail => throw new ApplicationException(fail.Error));
-script.ChangeName(id.Id, "Changed name")
-    .Throw(fail => throw new ApplicationException(fail.Error));
-script.ChangeQuantity(id.Id, 44)
-    .Throw(fail => throw new ApplicationException(fail.Error));
+script.AddItem("Новый");
+script.ChangeName("Новое имя");
+script.ChangeQuantity(33);
 
 ConsoleHelper.PrintLine("Нажать любую кнопку для изменений");
 ConsoleHelper.Pause();
 
-ConsoleHelper.PrintLine("Все элементы после изменений:");
-items = script.AllItems()
-    .TryGetValue(fail => throw new ApplicationException(fail.Error));
-foreach (var text in items)
-{
-    ConsoleHelper.PrintLine(text);
-}
+script.PrintAllItems("Все элементы после изменений:");
 
 ConsoleHelper.PrintFooter();

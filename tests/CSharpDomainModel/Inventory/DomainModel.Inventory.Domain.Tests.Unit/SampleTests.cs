@@ -1,6 +1,6 @@
 ﻿using AutoFixture.Xunit2;
 using FluentAssertions;
-using Kanadeiar.Tests;
+using Kanadeiar.Common.Tests;
 using Moq;
 
 namespace DomainModel.Inventory.Domain.Tests.Unit;

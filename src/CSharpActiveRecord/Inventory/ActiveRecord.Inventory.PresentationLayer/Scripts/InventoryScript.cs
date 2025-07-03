@@ -1,5 +1,5 @@
 ﻿using ActiveRecord.Inventory.ServicesLayer.Services;
-using Kanadeiar.Common;
+using Kanadeiar.Common.Functionals;
 
 namespace ActiveRecord.Inventory.PresentationLayer.Scripts;
 

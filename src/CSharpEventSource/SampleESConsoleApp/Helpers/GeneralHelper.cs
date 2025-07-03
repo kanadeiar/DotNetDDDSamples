@@ -7,13 +7,13 @@ namespace SampleESConsoleApp.Helpers;
 
 public static class GeneralHelper
 {
-    public static InventoryScript CreateScript()
+    public static InventoryApplicationService CreateService()
     {
         var dispatcher = GeneralHelper.dispatcher();
         var storage = GeneralHelper.storage(dispatcher);
         var master = ReadModelHelper.CreateReadModel(dispatcher);
 
-        var script = new InventoryScript(storage, master);
+        var script = new InventoryApplicationService(storage, master);
 
         return script;
     }
