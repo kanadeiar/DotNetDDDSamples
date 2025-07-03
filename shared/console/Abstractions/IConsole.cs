@@ -1,4 +1,4 @@
-﻿namespace RearmCSharp1L1T1.Questionnaire.PresentationLayer.Abstractions;
+﻿namespace Kanadeiar.Common.Abstractions;
 
 public interface IConsole
 {

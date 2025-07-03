@@ -1,6 +1,6 @@
 ﻿using ActiveRecord.Inventory.DataAccessLayer;
 using ActiveRecord.Inventory.DataAccessLayer.Contracts;
-using Kanadeiar.Common;
+using Kanadeiar.Common.Functionals;
 
 namespace ActiveRecord.Inventory.MainLogicLayer.InventoryModule;
 

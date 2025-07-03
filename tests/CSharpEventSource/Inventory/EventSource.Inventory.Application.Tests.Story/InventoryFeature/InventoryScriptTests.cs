@@ -8,8 +8,8 @@ using EventSource.Inventory.Domain.InventoryAggregate.Events;
 using EventSource.Inventory.Domain.InventoryAggregate.Values;
 using EventSource.Inventory.Domain.ReadModel;
 using FluentAssertions;
-using Kanadeiar.Common;
-using Kanadeiar.Tests;
+using Kanadeiar.Common.Functionals;
+using Kanadeiar.Common.Tests;
 using Moq;
 
 namespace EventSource.Inventory.Application.Tests.Story.InventoryFeature;
@@ -20,9 +20,9 @@ public class InventoryScriptTests
     [AutoMoqData]
     public void TestAllItems(InventoryProjection[] projections, Mock<IStorage<InventoryItem>> storageMock, Mock<IReadModelStorage> readMock, Mock<IDispatcher> dispatcherMock)
     {
-        var readSut = new Master(readMock.Object);
+        var readSut = new ReadModelMaster(readMock.Object);
         readSut.Init(dispatcherMock.Object);
-        var sut = new InventoryScript(storageMock.Object, readSut);
+        var sut = new InventoryApplicationService(storageMock.Object, readSut);
         sut.InitDemo().Should().BeOfType<Result>();
         readMock.SetupGet(x => x.All)
             .Returns(projections.ToList());
@@ -42,13 +42,13 @@ public class InventoryScriptTests
         var expected = new InventoryNameValue("Новое имя");
         var item = new InventoryItem(id, new InventoryNameValue("name"), new QuantityValue(0));
         AggregateRoot actual = null;
-        storageMock.Setup(x => x.GetById(It.IsAny<InventoryId>()))
+        storageMock.Setup(x => x.Load(It.IsAny<InventoryId>()))
             .Returns(item);
         storageMock.Setup(x => x.Save(It.IsAny<AggregateRoot>()))
             .Callback<AggregateRoot>(i => { actual = i; });
-        var sut = new InventoryScript(storageMock.Object, new Master(readMock.Object));
+        var sut = new InventoryApplicationService(storageMock.Object, new ReadModelMaster(readMock.Object));
 
-        var result = sut.ChangeName(id.Id, expected.Name);
+        var result = sut.ChangeName(id, expected);
 
         result.Should().BeOfType<Result>();
         actual.Id.Should().Be(item.Id);
@@ -65,13 +65,13 @@ public class InventoryScriptTests
         var expected = new QuantityValue(22);
         var item = new InventoryItem(id, new InventoryNameValue("name"), new QuantityValue(0));
         AggregateRoot actual = null;
-        storageMock.Setup(x => x.GetById(It.IsAny<InventoryId>()))
+        storageMock.Setup(x => x.Load(It.IsAny<InventoryId>()))
             .Returns(item);
         storageMock.Setup(x => x.Save(It.IsAny<AggregateRoot>()))
             .Callback<AggregateRoot>(i => { actual = i; });
-        var sut = new InventoryScript(storageMock.Object, new Master(readMock.Object));
+        var sut = new InventoryApplicationService(storageMock.Object, new ReadModelMaster(readMock.Object));
 
-        var result = sut.ChangeQuantity(id.Id, expected.Quantity);
+        var result = sut.ChangeQuantity(id, expected);
 
         result.Should().BeOfType<Result>();
         actual.Id.Should().Be(item.Id);

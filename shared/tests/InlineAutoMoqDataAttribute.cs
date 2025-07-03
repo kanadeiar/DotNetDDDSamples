@@ -1,11 +1,11 @@
 ﻿using AutoFixture.Xunit2;
-using Kanadeiar.Tests;
+using Kanadeiar.Common.Tests;
 
-namespace FrameworkConsoleApp1Tests.Infrastructure
+namespace Kanadeiar.Common.Tests;
+
+public class InlineAutoMoqDataAttribute : InlineAutoDataAttribute
 {
-    public class InlineAutoMoqDataAttribute : InlineAutoDataAttribute
-    {
-        public InlineAutoMoqDataAttribute(params object[] objects)
-            : base(new AutoMoqDataAttribute(), objects) { }
-    }
+    public InlineAutoMoqDataAttribute(params object[] objects)
+        : base(new AutoMoqDataAttribute(), objects) { }
 }
+

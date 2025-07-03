@@ -1,4 +1,5 @@
 ﻿using Kanadeiar.Common;
+using Kanadeiar.Common.Functionals;
 using TransactionScript.Inventory.DataAccessLayer.Data;
 using TransactionScript.Inventory.PresentationLayer.Scripts;
 

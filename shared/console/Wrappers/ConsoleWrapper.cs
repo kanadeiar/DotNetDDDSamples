@@ -1,18 +1,19 @@
-﻿using RearmCSharp1L1T1.Questionnaire.PresentationLayer.Abstractions;
+﻿using System;
+using Kanadeiar.Common.Abstractions;
 
-namespace RearmCSharp1L1T1.Questionnaire.PresentationLayer.Adapters;
+namespace Kanadeiar.Common.Wrappers;
 
 public class ConsoleWrapper : IConsole
 {
     public string Title
     {
-        get => Console.Title; 
+        get => Console.Title;
         set => Console.Title = value;
     }
 
     public int WindowWidth
     {
-        get => Console.WindowWidth; 
+        get => Console.WindowWidth;
         set => Console.WindowWidth = value;
     }
 

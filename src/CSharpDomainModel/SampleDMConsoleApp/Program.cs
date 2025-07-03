@@ -1,4 +1,5 @@
 ﻿using Kanadeiar.Common;
+using Kanadeiar.Common.Functionals;
 using SampleDMConsoleApp.Helpers;
 
 ConsoleHelper.PrintHeader("Образец основного поддомена на языке C#.", "Предметно-ориентированное проектирование на платформе .NET. Образцы приложений.");

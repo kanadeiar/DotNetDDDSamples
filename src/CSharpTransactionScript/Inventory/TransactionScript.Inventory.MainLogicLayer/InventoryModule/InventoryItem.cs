@@ -1,4 +1,4 @@
-﻿using Kanadeiar.Common;
+﻿using Kanadeiar.Common.Functionals;
 using TransactionScript.Inventory.DataAccessLayer.Contracts;
 
 namespace TransactionScript.Inventory.MainLogicLayer.InventoryModule;

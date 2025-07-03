@@ -1,4 +1,4 @@
-﻿using Kanadeiar.Common;
+﻿using Kanadeiar.Common.Functionals;
 
 namespace DomainModel.Inventory.Domain.InventoryAggregate.Values;
 

@@ -1,6 +1,6 @@
 ﻿using ActiveRecord.Inventory.DataAccessLayer;
 using ActiveRecord.Inventory.MainLogicLayer.InventoryModule;
-using Kanadeiar.Common;
+using Kanadeiar.Common.Functionals;
 
 namespace ActiveRecord.Inventory.ServicesLayer.Services;
 

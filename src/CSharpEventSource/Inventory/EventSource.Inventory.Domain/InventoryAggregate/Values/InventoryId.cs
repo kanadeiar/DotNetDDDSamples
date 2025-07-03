@@ -1,5 +1,5 @@
 ﻿using EventSource.Inventory.Contracts.Abstractions;
-using Kanadeiar.Common;
+using Kanadeiar.Common.Functionals;
 
 namespace EventSource.Inventory.Domain.InventoryAggregate.Values;
 

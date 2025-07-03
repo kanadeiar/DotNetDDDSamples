@@ -6,10 +6,10 @@ namespace SampleESConsoleApp.Helpers;
 
 public static class ReadModelHelper
 {
-    public static Master CreateReadModel(DomainEventDispatcher domainEventDispatcher)
+    public static ReadModelMaster CreateReadModel(DomainEventDispatcher domainEventDispatcher)
     {
         var readStorage = new ReadModelStorage();
-        var master = new Master(readStorage);
+        var master = new ReadModelMaster(readStorage);
         master.Init(domainEventDispatcher);
 
         return master;

@@ -1,6 +1,6 @@
 ﻿using DomainModel.Inventory.Domain.InventoryAggregate;
 using DomainModel.Inventory.Domain.InventoryAggregate.Values;
-using Kanadeiar.Common;
+using Kanadeiar.Common.Functionals;
 
 namespace DomainModel.Inventory.Application.Ports;
 

@@ -1,5 +1,4 @@
 ﻿using EventSource.Inventory.Contracts.Base;
-using System.Security.Principal;
 
 namespace EventSource.Inventory.Contracts.Abstractions;
 

@@ -5,8 +5,8 @@ using ActiveRecord.Inventory.MainLogicLayer.InventoryModule;
 using ActiveRecord.Inventory.ServicesLayer.Services;
 using AutoFixture.Xunit2;
 using FluentAssertions;
-using FrameworkConsoleApp1Tests.Infrastructure;
-using Kanadeiar.Common;
+using Kanadeiar.Common.Functionals;
+using Kanadeiar.Common.Tests;
 
 namespace ActiveRecord.Inventory.ServicesLayer.Tests.Integration.Services;
 

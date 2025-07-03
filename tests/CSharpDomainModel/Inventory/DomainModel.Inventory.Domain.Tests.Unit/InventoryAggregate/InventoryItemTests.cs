@@ -3,8 +3,7 @@ using DomainModel.Inventory.Contracts.Entries;
 using DomainModel.Inventory.Domain.InventoryAggregate;
 using DomainModel.Inventory.Domain.InventoryAggregate.Events;
 using DomainModel.Inventory.Domain.InventoryAggregate.Values;
-using FrameworkConsoleApp1Tests.Infrastructure;
-using Kanadeiar.Tests;
+using Kanadeiar.Common.Tests;
 
 namespace DomainModel.Inventory.Domain.Tests.Unit.InventoryAggregate;
 

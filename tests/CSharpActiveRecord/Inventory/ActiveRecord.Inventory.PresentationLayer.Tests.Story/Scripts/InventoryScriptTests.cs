@@ -2,7 +2,7 @@
 using ActiveRecord.Inventory.DataAccessLayer.Data;
 using ActiveRecord.Inventory.PresentationLayer.Scripts;
 using FluentAssertions;
-using Kanadeiar.Common;
+using Kanadeiar.Common.Functionals;
 
 namespace ActiveRecord.Inventory.PresentationLayer.Tests.Story.Scripts;
 

@@ -6,7 +6,7 @@ using EventSource.Inventory.Domain.ReadModel;
 
 namespace EventSource.Inventory.Application.ReadModel;
 
-public class Master(IReadModelStorage storage)
+public class ReadModelMaster(IReadModelStorage storage)
 {
     public IEnumerable<InventoryProjection> Inventories => storage.All;
 

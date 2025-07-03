@@ -10,7 +10,7 @@ public abstract class AggregateRoot
 
     public int Version { get; private set; } = -1;
 
-    public void Load(EventStream stream)
+    public void Apply(EventStream stream)
     {
         foreach (var @event in stream.Events) Mutate(@event);
         Version = stream.Version;

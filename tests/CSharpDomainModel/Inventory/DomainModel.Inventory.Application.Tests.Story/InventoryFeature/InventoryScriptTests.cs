@@ -6,8 +6,8 @@ using DomainModel.Inventory.Domain.InventoryAggregate;
 using DomainModel.Inventory.Domain.InventoryAggregate.Events;
 using DomainModel.Inventory.Domain.InventoryAggregate.Values;
 using FluentAssertions;
-using Kanadeiar.Common;
-using Kanadeiar.Tests;
+using Kanadeiar.Common.Functionals;
+using Kanadeiar.Common.Tests;
 using Moq;
 
 namespace DomainModel.Inventory.Application.Tests.Story.InventoryFeature;
