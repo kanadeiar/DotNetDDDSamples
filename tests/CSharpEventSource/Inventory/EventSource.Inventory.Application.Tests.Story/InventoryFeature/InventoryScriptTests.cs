@@ -30,7 +30,7 @@ public class InventoryScriptTests
         var actuals = sut.AllItems()
             .TryGetValue(_ => throw new ApplicationException());
         
-        storageMock.Verify(x => x.Save(It.IsAny<AggregateRoot>()), Times.Exactly(3));
+        storageMock.Verify(x => x.Save(It.IsAny<InventoryItem>()), Times.Exactly(3));
         actuals.Count().Should().Be(3);
         actuals.First().Should().Be(projections.First().ToString());
     }
@@ -44,7 +44,7 @@ public class InventoryScriptTests
         AggregateRoot actual = null;
         storageMock.Setup(x => x.Load(It.IsAny<InventoryId>()))
             .Returns(item);
-        storageMock.Setup(x => x.Save(It.IsAny<AggregateRoot>()))
+        storageMock.Setup(x => x.Save(It.IsAny<InventoryItem>()))
             .Callback<AggregateRoot>(i => { actual = i; });
         var sut = new InventoryApplicationService(storageMock.Object, new ReadModelMaster(readMock.Object));
 
@@ -67,7 +67,7 @@ public class InventoryScriptTests
         AggregateRoot actual = null;
         storageMock.Setup(x => x.Load(It.IsAny<InventoryId>()))
             .Returns(item);
-        storageMock.Setup(x => x.Save(It.IsAny<AggregateRoot>()))
+        storageMock.Setup(x => x.Save(It.IsAny<InventoryItem>()))
             .Callback<AggregateRoot>(i => { actual = i; });
         var sut = new InventoryApplicationService(storageMock.Object, new ReadModelMaster(readMock.Object));
 

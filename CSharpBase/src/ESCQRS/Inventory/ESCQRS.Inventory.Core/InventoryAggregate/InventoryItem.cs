@@ -1,8 +1,9 @@
-﻿using EventSource.Inventory.Contracts.Base;
-using EventSource.Inventory.Domain.InventoryAggregate.Events;
-using EventSource.Inventory.Domain.InventoryAggregate.Values;
+﻿using ESCQRS.Inventory.Core.Abstractions.Base;
+using ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
+using ESCQRS.Inventory.Core.InventoryAggregate.Events;
+using ESCQRS.Inventory.Core.InventoryAggregate.Values;
 
-namespace EventSource.Inventory.Domain.InventoryAggregate;
+namespace ESCQRS.Inventory.Core.InventoryAggregate;
 
 public class InventoryItem : AggregateRoot
 {
@@ -26,7 +27,7 @@ public class InventoryItem : AggregateRoot
         ApplyChange(new InventoryQuantityChanged(Id, newQuantity));
     }
 
-    protected override void Mutate(DomainEvent @event) =>
+    protected override void Mutate(IMessage @event) =>
         ((dynamic)this).when((dynamic)@event);
 
     private void when(InventoryCreated ev)

@@ -1,4 +1,4 @@
-﻿namespace EventSource.Inventory.Contracts.Abstractions;
+﻿namespace ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
 
 public interface IDispatcher : IDispatchDispatcher
 {

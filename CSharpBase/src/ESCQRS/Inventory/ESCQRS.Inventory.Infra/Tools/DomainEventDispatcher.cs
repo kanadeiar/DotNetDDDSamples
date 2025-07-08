@@ -1,6 +1,6 @@
-﻿using EventSource.Inventory.Contracts.Abstractions;
+﻿using ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
 
-namespace EventSource.Inventory.Infra.Tools;
+namespace ESCQRS.Inventory.Infra.Tools;
 
 public class DomainEventDispatcher : IDispatcher
 {
@@ -8,7 +8,7 @@ public class DomainEventDispatcher : IDispatcher
     private readonly Dictionary<Type, List<Action<IMessage>>> _routes = new();
     private readonly List<IMessage> _events = new();
 
-    public void RegisterHandler<T>(Action<T> handler)
+    public void RegisterHandler<T>(Action<T> handler) 
         where T : IMessage
     {
         lock (_lock)

@@ -1,7 +1,7 @@
-﻿using EventSource.Inventory.Contracts.Abstractions;
-using EventSource.Inventory.Contracts.Base;
+﻿using ESCQRS.Inventory.Core.Abstractions.Base;
+using ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
 
-namespace EventSource.Inventory.Infra.Data;
+namespace ESCQRS.Inventory.Infra.Adapters;
 
 public class Storage<T>(IEventStore store) : IStorage<T>
     where T : AggregateRoot, new()

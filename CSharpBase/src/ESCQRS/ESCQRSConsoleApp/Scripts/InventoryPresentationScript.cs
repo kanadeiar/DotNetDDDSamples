@@ -1,10 +1,9 @@
-﻿using EventSource.Inventory.Application.InventoryFeature;
-using EventSource.Inventory.Contracts.Abstractions;
-using EventSource.Inventory.Domain.InventoryAggregate.Values;
+﻿using ESCQRS.Inventory.Application.InventoryFeature;
+using ESCQRS.Inventory.Core.InventoryAggregate.Values;
 using Kanadeiar.Common;
 using Kanadeiar.Common.Functionals;
 
-namespace SampleESConsoleApp.Scripts;
+namespace ESCQRSConsoleApp.Scripts;
 
 public class InventoryPresentationScript(InventoryApplicationService service)
 {

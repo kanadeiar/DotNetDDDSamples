@@ -1,7 +1,7 @@
-﻿using EventSource.Inventory.Contracts.Abstractions;
-using EventSource.Inventory.Contracts.Base;
+﻿using ESCQRS.Inventory.Core.Abstractions.Base;
+using ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
 
-namespace EventSource.Inventory.Infra.Data;
+namespace ESCQRS.Inventory.Infra.Adapters;
 
 public class EventStore(IDispatcher dispatcher) : IEventStore
 {
@@ -15,10 +15,10 @@ public class EventStore(IDispatcher dispatcher) : IEventStore
         }
 
         return new EventStream(descriptors.Select(descriptor => descriptor.Data).ToList(),
-            descriptors.Max(descriptor => descriptor.Version));
+            descriptors.Last().Version);
     }
 
-    public void AppendToStream(IId id, ICollection<DomainEvent> events, int expectedVersion)
+    public void AppendToStream(IId id, ICollection<IMessage> events, int expectedVersion)
     {
         if (!_desctriptors.TryGetValue(id, out var descriptors))
         {
@@ -29,18 +29,18 @@ public class EventStore(IDispatcher dispatcher) : IEventStore
         {
             throw new ConcurrencyException();
         }
-        var i = expectedVersion;
+        var version = expectedVersion;
 
         foreach (var @event in events)
         {
-            i++;
-            descriptors.Add(new EventDescriptor(@event, i));
+            version++;
+            descriptors.Add(new EventDescriptor(@event, version));
         }
 
         dispatcher.Dispatch(events);
     }
 
-    private record EventDescriptor(DomainEvent Data, int Version);
+    private record EventDescriptor(IMessage Data, int Version);
 
     public class AggregateNotFoundException : Exception;
 
