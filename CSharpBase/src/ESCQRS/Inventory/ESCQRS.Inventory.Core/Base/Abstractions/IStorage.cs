@@ -1,4 +1,4 @@
-﻿namespace ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
+﻿namespace ESCQRS.Inventory.Core.Base.Abstractions;
 
 public interface IStorage<T> : ITransactionalStorage
     where T : AggregateRoot, new()

@@ -1,4 +1,4 @@
-﻿using ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
+﻿using ESCQRS.Inventory.Core.Base.Abstractions;
 using Kanadeiar.Common.Functionals;
 
 namespace ESCQRS.Inventory.Core.InventoryAggregate.Values;

@@ -1,6 +1,6 @@
-﻿using ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
+﻿using ESCQRS.Inventory.Core.Base.Abstractions;
 
-namespace ESCQRS.Inventory.Core.Abstractions.Base;
+namespace ESCQRS.Inventory.Core.Base;
 
 public abstract class AggregateRoot
 {

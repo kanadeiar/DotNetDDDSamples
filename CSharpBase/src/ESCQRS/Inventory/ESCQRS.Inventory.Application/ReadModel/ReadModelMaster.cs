@@ -1,6 +1,6 @@
 ﻿using ESCQRS.Inventory.Application.ReadModel.Handlers;
 using ESCQRS.Inventory.Application.ReadModel.Ports;
-using ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
+using ESCQRS.Inventory.Core.Base.Abstractions;
 using ESCQRS.Inventory.Core.InventoryAggregate.Events;
 using ESCQRS.Inventory.Core.ReadModel;
 

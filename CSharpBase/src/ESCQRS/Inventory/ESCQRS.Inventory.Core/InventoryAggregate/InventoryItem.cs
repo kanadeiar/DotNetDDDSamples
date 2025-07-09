@@ -1,5 +1,5 @@
-﻿using ESCQRS.Inventory.Core.Abstractions.Base;
-using ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
+﻿using ESCQRS.Inventory.Core.Base;
+using ESCQRS.Inventory.Core.Base.Abstractions;
 using ESCQRS.Inventory.Core.InventoryAggregate.Events;
 using ESCQRS.Inventory.Core.InventoryAggregate.Values;
 

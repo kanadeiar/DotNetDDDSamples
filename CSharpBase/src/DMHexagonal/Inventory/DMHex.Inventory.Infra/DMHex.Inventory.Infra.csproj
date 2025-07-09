@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Adapters\" />
     <Folder Include="Tools\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DMHex.Inventory.Application\DMHex.Inventory.Application.csproj" />
   </ItemGroup>
 
 </Project>

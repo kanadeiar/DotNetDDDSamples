@@ -1,4 +1,6 @@
-﻿namespace ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
+﻿using ESCQRS.Inventory.Core.Base;
+
+namespace ESCQRS.Inventory.Core.Base.Abstractions;
 
 public interface IEventStore
 {

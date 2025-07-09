@@ -1,4 +1,4 @@
-﻿using ESCQRS.Inventory.Core.Abstractions.Base.Abstractions;
+﻿using ESCQRS.Inventory.Core.Base.Abstractions;
 
 namespace ESCQRS.Inventory.Infra.Tools;
 
