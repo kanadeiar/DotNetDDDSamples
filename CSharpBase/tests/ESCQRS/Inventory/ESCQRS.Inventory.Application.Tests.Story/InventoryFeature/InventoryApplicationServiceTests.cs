@@ -1,20 +1,20 @@
-﻿using EventSource.Inventory.Application.InventoryFeature;
-using EventSource.Inventory.Application.Ports;
-using EventSource.Inventory.Application.ReadModel;
-using EventSource.Inventory.Contracts.Abstractions;
-using EventSource.Inventory.Contracts.Base;
-using EventSource.Inventory.Domain.InventoryAggregate;
-using EventSource.Inventory.Domain.InventoryAggregate.Events;
-using EventSource.Inventory.Domain.InventoryAggregate.Values;
-using EventSource.Inventory.Domain.ReadModel;
+﻿using ESCQRS.Inventory.Application.InventoryFeature;
+using ESCQRS.Inventory.Application.ReadModel;
+using ESCQRS.Inventory.Application.ReadModel.Ports;
+using ESCQRS.Inventory.Core.Base;
+using ESCQRS.Inventory.Core.Base.Abstractions;
+using ESCQRS.Inventory.Core.InventoryAggregate;
+using ESCQRS.Inventory.Core.InventoryAggregate.Events;
+using ESCQRS.Inventory.Core.InventoryAggregate.Values;
+using ESCQRS.Inventory.Core.ReadModel;
 using FluentAssertions;
 using Kanadeiar.Common.Functionals;
 using Kanadeiar.Common.Tests;
 using Moq;
 
-namespace EventSource.Inventory.Application.Tests.Story.InventoryFeature;
+namespace ESCQRS.Inventory.Application.Tests.Story.InventoryFeature;
 
-public class InventoryScriptTests
+public class InventoryApplicationServiceTests
 {
     [Theory(DisplayName = "История: Я, как пользователь, могу просмотреть в удобном виде демонстрационные данные.")]
     [AutoMoqData]
@@ -24,12 +24,12 @@ public class InventoryScriptTests
         readSut.Init(dispatcherMock.Object);
         var sut = new InventoryApplicationService(storageMock.Object, readSut);
         sut.InitDemo().Should().BeOfType<Result>();
-        readMock.SetupGet(x => x.All)
+        readMock.SetupGet(x => x.Inventories)
             .Returns(projections.ToList());
 
         var actuals = sut.AllItems()
             .TryGetValue(_ => throw new ApplicationException());
-        
+
         storageMock.Verify(x => x.Save(It.IsAny<InventoryItem>()), Times.Exactly(3));
         actuals.Count().Should().Be(3);
         actuals.First().ToString().Should().Be(projections.First().ToString());
@@ -40,12 +40,12 @@ public class InventoryScriptTests
     public void TestRename(InventoryId id, InventoryProjection[] projections, Mock<IStorage<InventoryItem>> storageMock, Mock<IReadModelStorage> readMock/*, Mock<IDispatcher> dispatcherMock*/)
     {
         var expected = new InventoryNameValue("Новое имя");
-        var item = new InventoryItem(id, new InventoryNameValue("name"), new QuantityValue(0));
-        AggregateRoot actual = null;
+        var item = InventoryItem.Create(id, new InventoryNameValue("name"), new QuantityValue(0));
+        EventAggregateRoot actual = null;
         storageMock.Setup(x => x.Load(It.IsAny<InventoryId>()))
             .Returns(item);
         storageMock.Setup(x => x.Save(It.IsAny<InventoryItem>()))
-            .Callback<AggregateRoot>(i => { actual = i; });
+            .Callback<EventAggregateRoot>(i => { actual = i; });
         var sut = new InventoryApplicationService(storageMock.Object, new ReadModelMaster(readMock.Object));
 
         var result = sut.ChangeName(id, expected);
@@ -63,12 +63,12 @@ public class InventoryScriptTests
     public void TestQuantity(InventoryId id, InventoryProjection[] projections, Mock<IStorage<InventoryItem>> storageMock, Mock<IReadModelStorage> readMock, Mock<IDispatcher> dispatcherMock)
     {
         var expected = new QuantityValue(22);
-        var item = new InventoryItem(id, new InventoryNameValue("name"), new QuantityValue(0));
-        AggregateRoot actual = null;
+        var item = InventoryItem.Create(id, new InventoryNameValue("name"), new QuantityValue(0));
+        EventAggregateRoot actual = null;
         storageMock.Setup(x => x.Load(It.IsAny<InventoryId>()))
             .Returns(item);
         storageMock.Setup(x => x.Save(It.IsAny<InventoryItem>()))
-            .Callback<AggregateRoot>(i => { actual = i; });
+            .Callback<EventAggregateRoot>(i => { actual = i; });
         var sut = new InventoryApplicationService(storageMock.Object, new ReadModelMaster(readMock.Object));
 
         var result = sut.ChangeQuantity(id, expected);

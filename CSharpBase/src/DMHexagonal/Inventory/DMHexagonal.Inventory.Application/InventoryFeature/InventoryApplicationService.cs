@@ -1,13 +1,11 @@
-﻿using ESCQRS.Inventory.Application.ReadModel;
-using ESCQRS.Inventory.Core.Base.Abstractions;
-using ESCQRS.Inventory.Core.InventoryAggregate;
-using ESCQRS.Inventory.Core.InventoryAggregate.Values;
-using ESCQRS.Inventory.Core.ReadModel;
+﻿using DMHexagonal.Inventory.Application.Ports;
+using DMHexagonal.Inventory.Core.InventoryAggregate;
+using DMHexagonal.Inventory.Core.InventoryAggregate.Values;
 using Kanadeiar.Common.Functionals;
 
-namespace ESCQRS.Inventory.Application.InventoryFeature;
+namespace DMHexagonal.Inventory.Application.InventoryFeature;
 
-public class InventoryApplicationService(IStorage<InventoryItem> storage, ReadModelMaster master)
+public class InventoryApplicationService(IInventoryStorage storage)
 {
     public Result InitDemo()
     {
@@ -25,9 +23,9 @@ public class InventoryApplicationService(IStorage<InventoryItem> storage, ReadMo
         }
     }
 
-    public Result<IEnumerable<InventoryProjection>> AllItems()
+    public Result<IEnumerable<InventoryItem>> AllItems()
     {
-        var items = master.Inventories;
+        var items = storage.All();
 
         return Result.Ok(items);
     }
@@ -37,7 +35,7 @@ public class InventoryApplicationService(IStorage<InventoryItem> storage, ReadMo
         try
         {
             storage.BeginTransaction();
-            var id = InventoryId.New;
+            var id = storage.NextIdentity();
 
             var item = InventoryItem.Create(id, name, new QuantityValue(0));
 

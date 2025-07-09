@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\ESCQRS\Inventory\ESCQRS.Inventory.Application\ESCQRS.Inventory.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\src\DMHexagonal\Inventory\DMHexagonal.Inventory.Core\DMHexagonal.Inventory.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

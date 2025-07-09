@@ -1,7 +1,7 @@
 ﻿namespace ESCQRS.Inventory.Core.Base.Abstractions;
 
 public interface IStorage<T> : ITransactionalStorage
-    where T : AggregateRoot, new()
+    where T : EventAggregateRoot, new()
 {
     T Load(IId id);
 

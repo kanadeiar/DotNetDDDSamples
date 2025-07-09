@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Inventory\DMHex.Inventory.Infra\DMHex.Inventory.Infra.csproj" />
+    <ProjectReference Include="..\Inventory\DMHexagonal.Inventory.Infra\DMHexagonal.Inventory.Infra.csproj" />
   </ItemGroup>
 
 </Project>
