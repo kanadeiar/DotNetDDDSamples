@@ -1,22 +1,21 @@
 ﻿using EventSource.Inventory.Contracts.Abstractions;
-using EventSource.Inventory.Contracts.Base;
 
 namespace EventSource.Inventory.Infra.Tools;
 
 public class DomainEventDispatcher : IDispatcher
 {
     private readonly Lock _lock = new();
-    private readonly Dictionary<Type, List<Action<DomainEvent>>> _routes = new();
-    private readonly List<DomainEvent> _events = new();
+    private readonly Dictionary<Type, List<Action<IMessage>>> _routes = new();
+    private readonly List<IMessage> _events = new();
 
     public void RegisterHandler<T>(Action<T> handler)
-        where T : DomainEvent
+        where T : IMessage
     {
         lock (_lock)
         {
             if (!_routes.TryGetValue(typeof(T), out var handlers))
             {
-                handlers = new List<Action<DomainEvent>>();
+                handlers = new List<Action<IMessage>>();
                 _routes.Add(typeof(T), handlers);
             }
 
@@ -24,7 +23,7 @@ public class DomainEventDispatcher : IDispatcher
         }
     }
 
-    public void Dispatch(IEnumerable<DomainEvent> events)
+    public void Dispatch(IEnumerable<IMessage> events)
     {
         lock (_lock)
         {

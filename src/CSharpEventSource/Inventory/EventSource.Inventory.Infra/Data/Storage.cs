@@ -3,21 +3,21 @@ using EventSource.Inventory.Contracts.Base;
 
 namespace EventSource.Inventory.Infra.Data;
 
-public class Storage<T>(IEventStore storage) : IStorage<T>
+public class Storage<T>(IEventStore store) : IStorage<T>
     where T : AggregateRoot, new()
 {
     public T Load(IId id)
     {
         var result = new T();
-        var stream = storage.LoadEventStream(id);
+        var stream = store.LoadEventStream(id);
         result.Apply(stream);
 
         return result;
     }
 
-    public void Save(AggregateRoot aggregate)
+    public void Save(T aggregate)
     {
-        storage.AppendToStream(aggregate.Id, aggregate.Changes(), aggregate.Version);
+        store.AppendToStream(aggregate.Id, aggregate.Changes(), aggregate.Version);
     }
 
     public void BeginTransaction() { }

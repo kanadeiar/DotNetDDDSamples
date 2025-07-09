@@ -2,13 +2,16 @@
 
 namespace EventSource.Inventory.Contracts.Abstractions;
 
-public interface IStorage<out T>
+public interface IStorage<T> : ITransactionalStorage
     where T : AggregateRoot, new()
 {
     T Load(IId id);
 
-    void Save(AggregateRoot aggregate);
+    void Save(T aggregate);
+}
 
+public interface ITransactionalStorage
+{
     public void BeginTransaction();
     public void Commit();
     public void Rollback();

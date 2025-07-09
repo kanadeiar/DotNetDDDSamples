@@ -5,12 +5,12 @@ using EventSource.Inventory.Infra.Tools;
 
 namespace SampleESConsoleApp.Helpers;
 
-public static class GeneralHelper
+public static class GeneralApplicationHelper
 {
     public static InventoryApplicationService CreateService()
     {
-        var dispatcher = GeneralHelper.dispatcher();
-        var storage = GeneralHelper.storage(dispatcher);
+        var dispatcher = GeneralApplicationHelper.dispatcher();
+        var storage = GeneralApplicationHelper.storage(dispatcher);
         var master = ReadModelHelper.CreateReadModel(dispatcher);
 
         var script = new InventoryApplicationService(storage, master);

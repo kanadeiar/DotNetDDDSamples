@@ -38,7 +38,6 @@ public class InventoryPresentationScript(InventoryApplicationService service)
     {
         service.ChangeName(_id, new InventoryNameValue(newName))
             .Throw(fail => throw new ApplicationException(fail.Error));
-
     }
 
     public void ChangeQuantity(int newQuantity)

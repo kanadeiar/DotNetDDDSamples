@@ -1,9 +1,12 @@
 ﻿namespace EventSource.Inventory.Contracts.Abstractions;
 
-public interface IDispatcher
+public interface IDispatcher : IDispatchDispatcher
 {
     void RegisterHandler<T>(Action<T> handler)
-        where T : Base.DomainEvent;
+        where T : IMessage;
+}
 
-    void Dispatch(IEnumerable<Base.DomainEvent> events);
+public interface IDispatchDispatcher
+{
+    void Dispatch(IEnumerable<IMessage> events);
 }

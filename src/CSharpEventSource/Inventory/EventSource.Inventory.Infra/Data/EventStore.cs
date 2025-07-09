@@ -14,7 +14,7 @@ public class EventStore(IDispatcher dispatcher) : IEventStore
             throw new AggregateNotFoundException();
         }
 
-        return new EventStream(descriptors.Select(descriptor => descriptor.EventData).ToList(),
+        return new EventStream(descriptors.Select(descriptor => descriptor.Data).ToList(),
             descriptors.Max(descriptor => descriptor.Version));
     }
 
@@ -40,7 +40,7 @@ public class EventStore(IDispatcher dispatcher) : IEventStore
         dispatcher.Dispatch(events);
     }
 
-    private record EventDescriptor(DomainEvent EventData, int Version);
+    private record EventDescriptor(DomainEvent Data, int Version);
 
     public class AggregateNotFoundException : Exception;
 

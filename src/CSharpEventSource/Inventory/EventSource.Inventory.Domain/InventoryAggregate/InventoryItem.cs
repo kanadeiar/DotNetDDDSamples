@@ -6,7 +6,7 @@ namespace EventSource.Inventory.Domain.InventoryAggregate;
 
 public class InventoryItem : AggregateRoot
 {
-    private InventoryId _id = default!;
+    private InventoryId _id = null!;
     public override InventoryId Id => _id;
 
     public InventoryItem(InventoryId id, InventoryNameValue name, QuantityValue quantity)
