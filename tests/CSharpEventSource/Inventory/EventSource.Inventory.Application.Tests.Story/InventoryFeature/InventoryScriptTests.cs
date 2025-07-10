@@ -32,7 +32,7 @@ public class InventoryScriptTests
         
         storageMock.Verify(x => x.Save(It.IsAny<InventoryItem>()), Times.Exactly(3));
         actuals.Count().Should().Be(3);
-        actuals.First().Should().Be(projections.First().ToString());
+        actuals.First().ToString().Should().Be(projections.First().ToString());
     }
 
     [Theory(DisplayName = "История: Я, как пользователь, могу отредактировать название любого элемента.")]

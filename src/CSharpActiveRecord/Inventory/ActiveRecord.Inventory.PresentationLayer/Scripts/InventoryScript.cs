@@ -5,7 +5,7 @@ namespace ActiveRecord.Inventory.PresentationLayer.Scripts;
 
 public class InventoryScript
 {
-    private readonly InventoryService _service = new();
+    private readonly InventoryApplicationService _service = new();
 
     public Result InitDemo()
     {
@@ -28,7 +28,7 @@ public class InventoryScript
         return _service.AllInventoryItems();
     }
 
-    public Result<int> AddItem(string? name, int quantity = 0)
+    public Result<int> AddItem(string name, int quantity = 0)
     {
         return _service.CreateNewInventoryItem(name, quantity);
     }

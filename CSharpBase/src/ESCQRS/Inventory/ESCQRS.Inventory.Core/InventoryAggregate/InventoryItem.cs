@@ -5,17 +5,17 @@ using ESCQRS.Inventory.Core.InventoryAggregate.Values;
 
 namespace ESCQRS.Inventory.Core.InventoryAggregate;
 
-public class InventoryItem : AggregateRoot
+public class InventoryItem : EventAggregateRoot
 {
     private InventoryId _id = null!;
     public override InventoryId Id => _id;
 
-    public InventoryItem(InventoryId id, InventoryNameValue name, QuantityValue quantity)
+    public static InventoryItem Create(InventoryId id, InventoryNameValue name, QuantityValue quantity)
     {
-        ApplyChange(new InventoryCreated(id, name, quantity));
+        var result = new InventoryItem();
+        result.ApplyChange(new InventoryCreated(id, name, quantity));
+        return result;
     }
-
-    public InventoryItem() { }
 
     public void Rename(InventoryNameValue newName)
     {

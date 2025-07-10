@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="$(SolutionDir)\shared\Console\**\*.*">
+      <Link>Common\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Inventory\AR4L.Inventory.Presentation\AR4L.Inventory.Presentation.csproj" />
+  </ItemGroup>
+
 </Project>

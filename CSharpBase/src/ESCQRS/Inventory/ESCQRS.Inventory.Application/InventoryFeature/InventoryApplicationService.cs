@@ -39,7 +39,7 @@ public class InventoryApplicationService(IStorage<InventoryItem> storage, ReadMo
             storage.BeginTransaction();
             var id = InventoryId.New;
 
-            var item = new InventoryItem(id, name, new QuantityValue(0));
+            var item = InventoryItem.Create(id, name, new QuantityValue(0));
 
             storage.Save(item);
             storage.Commit();

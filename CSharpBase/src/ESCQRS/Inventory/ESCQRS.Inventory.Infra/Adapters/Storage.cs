@@ -4,7 +4,7 @@ using ESCQRS.Inventory.Core.Base.Abstractions;
 namespace ESCQRS.Inventory.Infra.Adapters;
 
 public class Storage<T>(IEventStore store) : IStorage<T>
-    where T : AggregateRoot, new()
+    where T : EventAggregateRoot, new()
 {
     public T Load(IId id)
     {
@@ -18,6 +18,7 @@ public class Storage<T>(IEventStore store) : IStorage<T>
     public void Save(T aggregate)
     {
         store.AppendToStream(aggregate.Id, aggregate.Changes(), aggregate.Version);
+        aggregate.Reset();
     }
 
     public void BeginTransaction() { }
