@@ -29,7 +29,7 @@ public class InventoryServiceTests
     {
         var storage = new InventoryEntriesStorage();
         Registry.InitFake(new FakeRegistry{ FakeStorage = storage });
-        var sut = new InventoryService();
+        var sut = new InventoryApplicationService();
 
         sut.CreateNewInventoryItem(name, quantity);
 
@@ -47,7 +47,7 @@ public class InventoryServiceTests
         entry = new InventoryEntry { Id = storage.NextIdentity(), Name = entry.Name, Quantity = entry.Quantity };
         storage.Save(entry);
         Registry.InitFake(new FakeRegistry { FakeStorage = storage });
-        var sut = new InventoryService();
+        var sut = new InventoryApplicationService();
 
         var items = sut.AllInventoryItems()
             .Throw(f => new ApplicationException());
@@ -66,7 +66,7 @@ public class InventoryServiceTests
         entry = new InventoryEntry { Id = storage.NextIdentity(), Name = entry.Name, Quantity = entry.Quantity };
         storage.Save(entry);
         Registry.InitFake(new FakeRegistry { FakeStorage = storage });
-        var sut = new InventoryService();
+        var sut = new InventoryApplicationService();
 
         var result = sut.ChangeNameOfInventoryItem(entry.Id, expected);
 
@@ -84,7 +84,7 @@ public class InventoryServiceTests
         entry = new InventoryEntry { Id = storage.NextIdentity(), Name = entry.Name, Quantity = entry.Quantity };
         storage.Save(entry);
         Registry.InitFake(new FakeRegistry { FakeStorage = storage });
-        var sut = new InventoryService();
+        var sut = new InventoryApplicationService();
 
         var result = sut.ChangeQuantityOfInventoryItem(entry.Id, expected);
 

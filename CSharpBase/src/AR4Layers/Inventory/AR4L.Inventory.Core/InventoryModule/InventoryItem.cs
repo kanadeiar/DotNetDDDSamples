@@ -1,8 +1,8 @@
-﻿using ActiveRecord.Inventory.DataAccessLayer;
-using ActiveRecord.Inventory.DataAccessLayer.Contracts;
+﻿using AR4L.Inventory.DataAccess;
+using AR4L.Inventory.DataAccess.Entries;
 using Kanadeiar.Common.Functionals;
 
-namespace ActiveRecord.Inventory.MainLogicLayer.InventoryModule;
+namespace AR4L.Inventory.Core.InventoryModule;
 
 public class InventoryItem(int id, string name, int quantity)
 {
@@ -11,14 +11,14 @@ public class InventoryItem(int id, string name, int quantity)
     private readonly int _quantity = quantity.Require(quantity is >= 0 and <= 10000, () =>
         throw new ApplicationException("Количество должно быть от 0 до 10000 лет"));
 
-    public int Id { get; } = id.Require(id != 0, () =>
+    public int Id { get; } = id.Require(id != 0, () => 
         throw new ApplicationException("Должен быть назначен идентификатор"));
 
     public static InventoryItem Create(string name, int quantity)
     {
         var id = Registry.Storage.NextIdentity();
-        var result = new InventoryItem(id, name, quantity);
-        return result;
+
+        return new InventoryItem(id, name, quantity);
     }
 
     public static InventoryItem Restore(InventoryEntry entry)
@@ -43,8 +43,8 @@ public class InventoryItem(int id, string name, int quantity)
             var entry = Registry.Storage.Load(id);
             if (entry is null) return Result.Fail<InventoryItem>($"Элемент с идентификатором {id} не найден");
 
-            var result = new InventoryItem(entry.Id, 
-                entry.Name, 
+            var result = new InventoryItem(entry.Id,
+                entry.Name,
                 entry.Quantity);
 
             return Result.Ok(result);

@@ -1,12 +1,12 @@
-﻿using ActiveRecord.Inventory.DataAccessLayer;
-using ActiveRecord.Inventory.MainLogicLayer.InventoryModule;
+﻿using AR4L.Inventory.Core.InventoryModule;
+using AR4L.Inventory.DataAccess;
 using Kanadeiar.Common.Functionals;
 
-namespace ActiveRecord.Inventory.ServicesLayer.Services;
+namespace AR4L.Inventory.Services.Services;
 
-public class InventoryService
+public class InventoryApplicationService
 {
-    public Result<int> CreateNewInventoryItem(string? name, int quantity)
+    public Result<int> CreateNewInventoryItem(string name, int quantity)
     {
         try
         {
@@ -57,8 +57,8 @@ public class InventoryService
             var item = InventoryItem.Restore(entry);
 
             var actual = item.Rename(newName);
+            actual.Save();
 
-            Registry.Storage.Save(actual.Entry());
             return Result.Ok();
         }
         catch (Exception e)
@@ -79,8 +79,8 @@ public class InventoryService
             var item = InventoryItem.Restore(entry);
 
             var actual = item.Quantity(newQuantity);
-            
-            Registry.Storage.Save(actual.Entry());
+            actual.Save();
+
             return Result.Ok();
         }
         catch (Exception e)

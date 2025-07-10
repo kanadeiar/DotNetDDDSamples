@@ -1,7 +1,7 @@
-﻿using ActiveRecord.Inventory.ServicesLayer.Services;
+﻿using AR4L.Inventory.Services.Services;
 using Kanadeiar.Common.Functionals;
 
-namespace ActiveRecord.Inventory.PresentationLayer.Scripts;
+namespace AR4L.Inventory.Presentation.Scripts;
 
 public class InventoryScript
 {
