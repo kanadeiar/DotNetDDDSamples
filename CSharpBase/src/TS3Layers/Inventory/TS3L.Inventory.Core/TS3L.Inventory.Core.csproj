@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="InventoryModule\" />
+    <ProjectReference Include="..\TS3L.Inventory.DataAccess\TS3L.Inventory.DataAccess.csproj" />
   </ItemGroup>
 
 
