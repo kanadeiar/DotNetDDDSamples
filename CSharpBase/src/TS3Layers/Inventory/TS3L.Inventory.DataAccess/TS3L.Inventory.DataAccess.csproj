@@ -7,14 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="$(SolutionDir)\shared\functional\**\*.*">
+    <Compile Include="$(SolutionDir)\shared\Functionals\**\*.*">
       <Link>Common\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Abstractions\" />
-    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

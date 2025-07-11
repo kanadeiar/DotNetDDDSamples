@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Scripts\" />
+    <ProjectReference Include="..\TS3L.Inventory.Core\TS3L.Inventory.Core.csproj" />
   </ItemGroup>
 
 </Project>
