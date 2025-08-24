@@ -1,18 +1,16 @@
 ﻿using DMHexagonal.Inventory.Core.Base;
-using DMHexagonal.Inventory.Core.Base.Abstractions;
 using DMHexagonal.Inventory.Core.Entries;
 using DMHexagonal.Inventory.Core.InventoryAggregate.Events;
 using DMHexagonal.Inventory.Core.InventoryAggregate.Values;
 
 namespace DMHexagonal.Inventory.Core.InventoryAggregate;
 
-public class InventoryItem : AggregateRoot
+public class InventoryItem(InventoryId id, InventoryNameValue name, QuantityValue quantity) : AggregateRoot
 {
-    private readonly InventoryId _id;
-    private InventoryNameValue _name;
-    private QuantityValue _quantity;
+    private InventoryNameValue _name = name;
+    private QuantityValue _quantity = quantity;
 
-    public override InventoryId Id => _id;
+    public override InventoryId Id => id;
 
     public static InventoryItem Create(InventoryId id, InventoryNameValue name, QuantityValue quantity)
     {
@@ -26,29 +24,22 @@ public class InventoryItem : AggregateRoot
         return new InventoryItem(new InventoryId(entry.Id), new InventoryNameValue(entry.Name), new QuantityValue(entry.Quantity));
     }
 
-    private InventoryItem(InventoryId id, InventoryNameValue name, QuantityValue quantity)
-    {
-        _id = id;
-        _name = name;
-        _quantity = quantity;
-    }
-
     public void Rename(InventoryNameValue newName)
     {
         _name = newName;
-        ApplyChange(new InventoryRenamed(_id, newName));
+        ApplyChange(new InventoryRenamed(Id, newName));
     }
 
     public void Quantity(QuantityValue newQuantity)
     {
         _quantity = newQuantity;
-        ApplyChange(new InventoryQuantityChanged(_id, newQuantity));
+        ApplyChange(new InventoryQuantityChanged(Id, newQuantity));
     }
 
     public InventoryEntry Entry() =>
         new()
         {
-            Id = _id.Id,
+            Id = Id.Id,
             Name = _name.Name,
             Quantity = _quantity.Quantity,
         };

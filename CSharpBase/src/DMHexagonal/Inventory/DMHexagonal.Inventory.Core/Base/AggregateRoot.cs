@@ -13,7 +13,11 @@ public abstract class AggregateRoot
         _changes.Add(@event);
     }
 
-    public IEnumerable<IMessage> Changes() => _changes;
-
-    public void Reset() => _changes.Clear();
+    public IEnumerable<IMessage> Changes()
+    {
+        var results = _changes.ToArray();
+        _changes.Clear();
+        
+        return results;
+    }
 }
